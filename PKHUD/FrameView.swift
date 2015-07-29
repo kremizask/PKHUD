@@ -9,12 +9,13 @@
 import UIKit
 
 /// Provides the general look and feel of the PKHUD, into which the eventual content is inserted.
-internal class FrameView: UIVisualEffectView {
-    internal init() {
-        super.init(effect: UIBlurEffect(style: .Light))
+internal class FrameView: UIView {
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         commonInit()
     }
-
+    
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
@@ -25,7 +26,7 @@ internal class FrameView: UIVisualEffectView {
         layer.cornerRadius = 9.0
         layer.masksToBounds = true
         
-        contentView.addSubview(self.content)
+        self.addSubview(self.content)
         
         let offset = 20.0
         
@@ -51,7 +52,7 @@ internal class FrameView: UIVisualEffectView {
         set {
             _content.removeFromSuperview()
             _content = newValue
-            _content.alpha = 0.85
+            _content.alpha = 1
             _content.clipsToBounds = true
             _content.contentMode = .Center
             frame.size = _content.bounds.size
